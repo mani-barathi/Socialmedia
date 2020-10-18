@@ -1,0 +1,24 @@
+{% extends 'users/base.html'%}
+{% block title %} Login | Social Media{% endblock %}
+{% load static %}
+{% block content %}
+
+	<div class="container">
+		<div class="row justify-content-center mt-4">
+			<div class="col-md-8">
+				<h2>About</h2>
+				<hr>
+				<div class="row align-items-center">
+					<div class="col-md-3">
+						<center><img class="img img-fluid rounded-circle my-img" height="200" width="200" src="{% static 'mani.jpg' %}"></center>
+					</div>
+					<div class="col-md-9 mt-md-1 mt-4">
+						<p>This website was develped by Manibarathi as a project to learn about django.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	
+{% endblock %}

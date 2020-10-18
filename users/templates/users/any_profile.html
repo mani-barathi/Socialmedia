@@ -1,0 +1,43 @@
+{% extends 'users/base.html'%}
+{% block title %} {{userobj.first_name}} {{userobj.last_name}} (@{{userobj.username}}) {% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+	<div class="row d-flex justify-content-center">
+		<div class="total-container mt-3">
+			<div class="profile-details">
+				<div class="profile-image">
+					<img  height="100" width="100" class="rounded-circle account-img" src="{{userobj.profile.image.url}}">
+				</div>
+				<div class="profile-info ml-3">
+					<h3>{{userobj.username}}</h3>
+					<small class="text-muted">{{userobj.email}}</small>
+				</div>
+			</div>
+
+			<div class="bio-container ml-2">
+				<h6>{{userobj.first_name}} {{userobj.last_name}}</h6>
+				<div>
+					<p>{{userobj.profile.bio}}</p>	
+				</div>
+			</div>
+			<div class="profile-posts-container">
+				<!-- <div class="card-group">
+					{% for post in posts %}
+				  <div class="card">
+				    <img src="{{post.image.url}}" class="card-img-top" alt="...">	
+				  </div>
+				  	{% endfor %}
+				</div> -->
+				{% for post in posts %}
+					<div class="posts">
+						<a href="/post/{{post.id}}">
+							<img src="{{post.image.url}}">
+						</a>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+	
+{% endblock %}

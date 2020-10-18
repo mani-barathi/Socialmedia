@@ -1,0 +1,88 @@
+{% extends 'users/base.html'%}
+{% load static %}
+{% block title %}Social Media{% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+	{% if user.is_authenticated %}
+		<div class="row justify-content-center mb-5">
+			<div class="col-lg-6 col-md-9 mb-4 infinite-container">
+				{% for post in posts %}
+					<div class="post-container mt-4 infinite-item">
+				        <div class="post-header">
+				            <div class="post-user-image">
+				                <a href="/user/{{post.author}}">
+				                	<img width="40" height="40" class="rounded-circle ml-1" src="{{post.author.profile.image.url}}" alt="">
+				                </a>
+				            </div>
+				            <div class="post-author">
+				                <h6><a href="{% url 'any_profile' post.author.username %}">{{post.author}}</a></h6>
+				            </div>
+				        </div>
+				        <div class="post-image">
+				            <a href="{% url 'post-detail' post.id %}"><img src="{{post.image.url}}" alt=""></a>
+				        </div>
+				        <div class="post-caption">
+				            <p>{{post.caption}}</p>
+				                <small class="text-muted" style="font-size:x-small;">
+				                	{{post.date_posted| date:"l N d, Y"}}
+				                </small>
+				        </div>
+				    </div>
+				{% endfor %}
+			</div>
+			
+		</div>
+		<div class="row justify-content-center align-items-center mb-5">
+			<div class="col-lg-6 col-md-9 mb-4">
+			<!-- <center>
+			{% if is_paginated %}
+				{% if page_obj.has_previous %}
+					<a class="mr-5 " 
+					href="?page={{page_obj.previous_page_number}}"><i class="fas fa-angle-left fa-lg"></i></a>
+				{% endif %}
+				{% if page_obj.has_next %}
+					<a class="ml-5 " 
+					href="?page={{page_obj.next_page_number}}"><i class="fas fa-angle-right fa-lg"></i></a>
+				{% endif %}
+			{% endif %}	
+			</center> -->
+			<center>
+			{% if page_obj.has_next %}
+                <a class="infinite-more-link" href="?page={{ page_obj.next_page_number }}"></a>
+            {% endif %}
+
+             <div class="d-flex justify-content-center" style="display:none;">
+                    <div class="spinner-border loading" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+            </center>
+               
+			</div>
+		</div>
+
+	{% else %}
+		<div class="row justify-content-center">
+			<div class="col-md-8">
+				<h1 class=" mt-3 display-4">A New World is rising.</h1>
+				<h1 class="display-4">Let’s Discover it</h1>
+				<a class="btn btn-primary btn-lg" href="{% url 'signup' %}">Join</a>
+			</div>
+		</div>
+	{% endif %}
+
+	<script src='{% static "js/jquery.waypoints.min.js" %}'></script>
+	<script src='{% static "js/infinite.min.js" %}'></script>
+	<script type="text/javascript">
+	var infinite = new Waypoint.Infinite({
+      element: $('.infinite-container')[0],
+      onBeforePageLoad: function () {
+        $('.loading').show();
+      },
+      onAfterPageLoad: function ($items) {
+        $('.loading').hide();
+      }
+    });
+	</script>
+
+{% endblock %}

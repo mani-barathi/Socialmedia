@@ -1,0 +1,36 @@
+{% extends 'users/base.html'%}
+{% block title %} Post | Social Media{% endblock %}
+
+{% block content %}
+		<div class="row justify-content-center mb-5">
+			<div class="col-lg-6 col-md-9 mb-4">
+				<div class="post-container mt-4">
+			        <div class="post-header">
+			            <div class="post-user-image">
+			                <a href="/user/{{object.author}}">
+			                	<img width="40" height="40" class="rounded-circle" src="{{object.author.profile.image.url}}" alt="">
+			                </a>
+			            </div>
+			            <div class="post-author">
+			                <h6>{{object.author}}</h6>
+			            </div>
+			            <div>
+			            	{% if object.author == user %}
+			                	<a href="{% url 'post-update' object.id %}" class="btn btn-secondary btn-sm">Update</a>
+			                	<a href="{% url 'post-delete' object.id %}" class="btn btn-danger btn-sm">Delete</a>
+			                {% endif %}
+			            </div>
+			        </div>
+			        <div class="post-image">
+			            <img src="{{post.image.url}}" alt="">
+			        </div>
+			        <div class="post-caption">
+			            <p>{{object.caption}}</p>
+			                <small class="text-muted" style="font-size:x-small;">
+			                	{{object.date_posted| date:"l N d, Y"}}
+			                </small>
+			        </div>
+			    </div>
+			</div>
+		</div>
+{% endblock %}

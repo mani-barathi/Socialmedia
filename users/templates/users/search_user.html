@@ -1,0 +1,30 @@
+{% extends 'users/base.html'%}
+{% block title %} Search | Social Media{% endblock %}
+{% block content %}
+	<div class="search-user row justify-content-center mt-4">
+		<div class="col-lg-4 col-md-6 ">
+			<center><h5>Search Results for '{{search_user}}'</h5></center>
+			{% if not fetch %}
+				<center> <h6>No result Found !</h6> </center>
+			{% endif %}
+			{% for user in users %}
+				
+				<div class="d-flex align-items-center">
+					<div>
+						<a href="{% url 'any_profile' user.username	 %}">
+						<img width="60" height="60" src="{{user.profile.image.url}}" class="rounded-circle"> </a>
+					</div>
+					<div class="ml-4 d-flex flex-column">
+						<a href="{% url 'any_profile' user.username	 %}"><h5>{{user.username}}</h5></a>
+						<small class="text-muted">{{user.first_name}} {{user.last_name}}</small>
+					</div>
+				</div>
+				<hr>
+				
+			{% endfor %}
+		</div>
+
+	</div>
+			
+	
+{% endblock %}

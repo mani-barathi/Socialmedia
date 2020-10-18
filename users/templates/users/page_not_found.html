@@ -1,0 +1,19 @@
+{% extends 'users/base.html'%}
+{% block title %} {{userobj.username}} | Social Media{% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+	<div class="container">
+		<div class="row justify-content-center mt-4 mb-5">
+			<div >
+				<center>
+					<h4>Sorry, this page isn't available.</h4>
+				<br>
+					<h6>The link you followed may be broken, or the page may have been removed. Go back to 
+						<a href="{% url 'index' %}">Social Media</a></h6>
+				</center>
+			</div>
+		</div>
+	</div>
+	
+{% endblock %}

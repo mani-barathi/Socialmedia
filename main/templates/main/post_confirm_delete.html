@@ -1,0 +1,20 @@
+{% extends 'users/base.html'%}
+{% block title %} Delete Post | Social Media{% endblock %}
+{% block content %}
+
+	<div class="container">
+		<div class="row justify-content-center mt-4">
+			<div class="col-md-6">
+				<h2>Confirm Delete Post</h2>
+				<hr>
+				<form method="post">
+					{% csrf_token %}
+					<button class="btn btn-danger">Delete</button>
+					<a href="{% url 'post-detail' object.id %}" class="btn btn-secondary">Cancel</a>
+				</form>
+			</div>
+		</div>
+
+	</div>
+	
+{% endblock %}

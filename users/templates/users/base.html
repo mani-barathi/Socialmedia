@@ -1,0 +1,91 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+    <link rel="stylesheet" type="text/css" href="{% static 'users/style.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <!-- favicon  -->
+  <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+    <title>{% block title %} Social Media {% endblock %}</title>
+  </head>
+  <body class="app-container">
+
+    <!-- navbar -->
+      <div class="nav-container">
+        <div class="nav-controller">
+          <div class="nav-left">
+          <a  class="d-flex align-items-center" href="{% url 'index' %}">
+            <i class="fa fa-home fa-2x" aria-hidden="true"></i>
+          </a>
+          {% if user.is_authenticated %}
+            
+            <a href="{% url 'post-create' %}">New Post</a>
+          {% endif %}
+        </div>
+        <div class="nav-middle">
+          {% if user.is_authenticated %}
+            <form method="get" action="{% url 'search_user' %}">
+              <input type="text" name="q" placeholder="Search" class="text-center search-bar" required autocomplete="off">
+              <button class="d-none">Search</button>
+            </form>
+           {% endif %} 
+        </div>
+        <div class="nav-right">
+          {% if user.is_authenticated %}
+            <!-- <a  href="{% url 'profile' %}">Profile</a>
+             <a href="{% url 'logout' %}"><img width="30" height="30" src="{{user.profile.image.url}}" class="rounded-circle"></a>  -->
+             <div class="img-container mr-2" id="img-container">
+                
+               <img id="user-image" class="user-image rounded-circle" width="30" height="30" src="{{user.profile.image.url}}" >
+                <div class="dropdown" id="dropdown">
+                    <a  href="{% url 'any_profile' user.username %}">My Profile</a>
+                    <a  href="{% url 'profile' %}">Edit Profile</a>
+                    <a  href="{% url 'about' %}">About</a>
+                    <div class="border-top col row align-items-center justify-content-center">
+                      <a  href="{% url 'logout' %}">Logout</a>
+                    </div>
+                </div>
+            </div>
+          {% else %} 
+            <!-- <a href="{% url 'signup' %}">Signup</a> -->
+            <a  href="{% url 'about' %}">About</a>
+            <a href="{% url 'login' %}">Login</a>
+          {% endif %}    
+        </div>
+       </div>
+      </div>
+
+      <!-- messages -->
+      {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-{{message.tags}}">
+          {{message}}
+        </div>
+       {% endfor %} 
+    {% endif %}
+
+    <!-- EveryThing Loads Here -->
+     <div class="container">
+       {% block content %}
+
+       {% endblock %}
+     </div> 
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- my javascript -->
+    <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
+  </body>
+</html>
