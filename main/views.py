@@ -17,10 +17,11 @@ class PostListView(ListView):
 	ordering = ['-date_posted']
 	paginate_by = 5
 
-class PostDetailView(DetailView):
+
+class PostDetailView(DetailView): 			# uses post_detail.html
 	model = Post
 
-class PostCreateView(LoginRequiredMixin,CreateView):
+class PostCreateView(LoginRequiredMixin,CreateView):   # uses post_form.html
 	model = Post
 	fields = ['image','caption']
 	success_url = reverse_lazy('index') # if the post succesfully posted reverse to index view
@@ -31,7 +32,7 @@ class PostCreateView(LoginRequiredMixin,CreateView):
 		form.instance.author = self.request.user
 		return super().form_valid(form)
 
-class PostUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
+class PostUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):   # uses post_form.html
 	model = Post
 	fields = ['image','caption']
 	success_url = reverse_lazy('index') # if the post succesfully posted reverse to index view
@@ -48,7 +49,7 @@ class PostUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
 		else:
 			return False
 
-class PostDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
+class PostDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView):	# uses post_confirm_delete.html
 	model = Post
 	success_url = reverse_lazy('index')
 	def test_func(self):

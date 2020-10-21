@@ -14,7 +14,7 @@ button:focus {
 }
 
 .app-container{
-	background: whitesmoke;
+	background:  #f8f9f9 ;
 }
 
 .nav-container{
@@ -133,10 +133,10 @@ button:focus {
     justify-content: center;
     width: 100%;
 }
-.post-image > a > img{
+/*.post-image > a > img{
     width: 100%;
     object-fit: contain;
-}
+}*/
 .post-image > img{
     width: 100%;
     object-fit: contain;
@@ -221,4 +221,21 @@ button:focus {
         width: 75px;
         height: 75px;
     }
+}
+
+/* Settings Page */
+.item-container{
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+}
+
+.item-container > a{
+    display: block;
+    padding: 10px 20px;
+
+}
+
+.item-container> a:hover{
+    background: #E5E7E9;
 }

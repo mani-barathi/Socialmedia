@@ -1,8 +1,12 @@
 from django.shortcuts import render,redirect
 from django.contrib import messages
-from  django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
 from django.db.models import Q
+from django.core.mail import send_mail
+from django.conf import settings
 from .forms import UserSignUpForm,UserUpdateForm,ProfileUpdateForm
 # from .models import Profile
 
@@ -15,7 +19,13 @@ def signup(request):
 		form = UserSignUpForm(request.POST)	
 		if form.is_valid():
 			username = form.cleaned_data['username']
+			email = form.cleaned_data['email']
 			form.save()
+			subject = 'Welocome to Social Media'
+			msg = f'Hi {username}, We are glad to have you here!. Start sharing you Posts.'
+			sender = settings.EMAIL_HOST_USER
+			receiver = [email,]
+			send_mail(subject,msg, sender, receiver)
 			messages.success(request,f'Account created for {username}!')
 			return redirect('login')			
 	else:	
@@ -23,7 +33,7 @@ def signup(request):
 	return render(request,'users/signup.html',{'form':form})
 
 @login_required
-def profile(request):
+def profile(request):			# edit my profile view
 	if request.method=='POST':
 		u_form = UserUpdateForm(request.POST,instance=request.user)
 		p_form = ProfileUpdateForm(request.POST,request.FILES,instance=request.user.profile)
@@ -58,6 +68,22 @@ def search_user(request):
 	if len(result)==0:
 		context['fetch'] = False
 	return render(request,'users/search_user.html',context)
+
+@login_required
+def change_password(request):
+	if request.method == 'POST':
+		form = PasswordChangeForm(request.user,request.POST)
+		if form.is_valid():
+			user = form.save()
+			update_session_auth_hash(request,user)
+			messages.success(request,'Your Password is Successfully Updated!')
+			return redirect('index')			
+	form = PasswordChangeForm(request.user)
+	return render(request,'users/change_password.html',{'form':form})
+
+@login_required
+def settings(request):
+	return render(request,'users/settings.html')
 
 
 def about(request):

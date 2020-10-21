@@ -45,8 +45,8 @@
                 
                <img id="user-image" class="user-image rounded-circle" width="30" height="30" src="{{user.profile.image.url}}" >
                 <div class="dropdown" id="dropdown">
-                    <a  href="{% url 'any_profile' user.username %}">My Profile</a>
-                    <a  href="{% url 'profile' %}">Edit Profile</a>
+                    <a  href="{% url 'any_profile' user.username %}">Profile</a>
+                    <a  href="{% url 'settings' %}">Settings</a>
                     <a  href="{% url 'about' %}">About</a>
                     <div class="border-top col row align-items-center justify-content-center">
                       <a  href="{% url 'logout' %}">Logout</a>

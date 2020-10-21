@@ -26,12 +26,11 @@ urlpatterns = [
     path('signup/',users_views.signup,name='signup'),
     path('login/',auth_views.LoginView.as_view(template_name='users/login.html'),name='login'),
     path('logout/',auth_views.LogoutView.as_view(template_name='main/index.html'),name='logout'),
+    path('changepassword/',users_views.change_password,name='change_password'),
     path('profile/',users_views.profile,name='profile'),
-    # path('newpost/',main_views.new_post,name='new_post'),
+    path('settings/',users_views.settings,name='settings'),
     path('user/',include('users.urls')),  
     path('search/>',users_views.search_user,name='search_user'),
-    # path('login/',users_views.login_view,name='login'),
-    # path('logout/',users_views.logout_view,name='logout'),
     path('',include('main.urls'))
     
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
