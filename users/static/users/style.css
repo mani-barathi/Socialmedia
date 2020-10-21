@@ -173,7 +173,6 @@ button:focus {
 .profile-posts-container{
     /*display: flex;*/
     width: 100%;
-    /*background: blue;*/
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;/*
     grid-template-rows: 160px 160px 160px;*/
@@ -181,6 +180,7 @@ button:focus {
     border-top: 1px solid lightgrey;
     padding: 10px 5px;
 }
+
 .posts{
    display: flex;
    justify-content: center;
@@ -189,6 +189,9 @@ button:focus {
     object-fit: cover;
     height: 158px;
     width: 158px;
+}
+.posts > a:hover{
+    filter: brightness(90%);
 }
 
 @media screen and (max-width: 400px){

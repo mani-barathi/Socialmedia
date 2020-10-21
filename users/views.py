@@ -37,12 +37,16 @@ def profile(request):			# edit my profile view
 	if request.method=='POST':
 		u_form = UserUpdateForm(request.POST,instance=request.user)
 		p_form = ProfileUpdateForm(request.POST,request.FILES,instance=request.user.profile)
+		# instance is passsed to form because it has to know what User and Profile it has to update
+		# if it is not passed it will try to create an another new object for User and Profile
 		if u_form.is_valid() and p_form.is_valid():
 			u_form.save()
 			p_form.save()
 			messages.success(request,f'Profile Successfully Updated')
 			return redirect('profile')		
-	u_form = UserUpdateForm(instance=request.user)
+
+	#  Passing the user, profile objects to the forms makes sures to populate pre existing data to it
+	u_form = UserUpdateForm(instance=request.user)			
 	p_form = ProfileUpdateForm(instance=request.user.profile)	
 	return render(request,'users/profile.html',{'u_form':u_form,'p_form':p_form})
 
@@ -63,7 +67,9 @@ def search_user(request):
 	if request.method=='GET':
 		search_user = request.GET.get('q')
 	# kwargs = { '{0}__{1}'.format('first_name','icontains'):search_user}
-	result = User.objects.filter(Q(first_name__icontains=search_user) | Q(last_name__icontains=search_user) | Q(username__icontains=search_user) )
+	result = User.objects.filter(Q(first_name__icontains=search_user) | 
+								 Q(last_name__icontains=search_user) |
+								 Q(username__icontains=search_user) )
 	context={ 'users':result ,'fetch':True,'search_user':search_user}
 	if len(result)==0:
 		context['fetch'] = False
@@ -75,7 +81,11 @@ def change_password(request):
 		form = PasswordChangeForm(request.user,request.POST)
 		if form.is_valid():
 			user = form.save()
-			update_session_auth_hash(request,user)
+
+			update_session_auth_hash(request,user)		# takes the updated user and request
+			#This function takes the current request and the updated user object from which the new session hash will be derived and 
+			#updates the session hash appropriately. It also rotates the session key so that a stolen session cookie will be invalidated.
+			
 			messages.success(request,'Your Password is Successfully Updated!')
 			return redirect('index')			
 	form = PasswordChangeForm(request.user)
