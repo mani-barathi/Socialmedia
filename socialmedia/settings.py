@@ -124,13 +124,15 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR,'static'),]
 
+# MEDIA_ROOT =  os.path.join(BASE_DIR, 'media') 
+# MEDIA_URL = '/media/'
+
+
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGIN_REDIRECT_URL = 'index'
 LOGIN_URL = 'login' # name that we gave for url pattern
 
-# MEDIA_ROOT =  os.path.join(BASE_DIR, 'media') 
-# MEDIA_URL = '/media/'
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
