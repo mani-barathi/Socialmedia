@@ -120,17 +120,17 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
-
+# STATIC_ROOT = '/static/'
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (os.path.join(BASE_DIR,'static'),)
+STATICFILES_DIRS = [os.path.join(BASE_DIR,'socialmedia/static'),]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGIN_REDIRECT_URL = 'index'
 LOGIN_URL = 'login' # name that we gave for url pattern
 
-MEDIA_ROOT =  os.path.join(BASE_DIR, 'media') 
-MEDIA_URL = '/media/'
+# MEDIA_ROOT =  os.path.join(BASE_DIR, 'media') 
+# MEDIA_URL = '/media/'
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -156,3 +156,18 @@ SERVER_EMAIL = EMAIL_HOST_USER
 # AWS_DEFAULT_ACL = None
 
 # DEFAULT_FILE_STORAGES = 'storages.backends.s3boto3.S3Boto3Storage'
+
+AWS_ACCESS_KEY_ID = 'AKIAQ7DQ4JBKHMGXEW7S'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'socialmedia-django'
+AWS_S3_HOST = 'rds.ap-south-1.amazonaws.com ' 
+AWS_S3_REGION_NAME="ap-south-1"
+# AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+
+# PUBLIC_MEDIA_LOCATION = 'media'
+# MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{PUBLIC_MEDIA_LOCATION}/'
+# DEFAULT_FILE_STORAGE = 'users.storage_backends.PublicMediaStorage'
+
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
