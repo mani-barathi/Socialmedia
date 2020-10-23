@@ -6,7 +6,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.db.models import Q
 from django.core.mail import send_mail
-from django.conf import settings
+from socialmedia import settings
 from .forms import UserSignUpForm,UserUpdateForm,ProfileUpdateForm
 # from .models import Profile
 
