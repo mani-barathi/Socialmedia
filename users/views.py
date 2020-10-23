@@ -6,7 +6,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.db.models import Q
 from django.core.mail import send_mail
-from socialmedia import settings
+from django.conf import settings
 from .forms import UserSignUpForm,UserUpdateForm,ProfileUpdateForm
 # from .models import Profile
 
@@ -23,7 +23,7 @@ def signup(request):
 			form.save()
 			subject = 'Welocome to Social Media'
 			msg = f'Hi {username}, We are glad to have you here!. Start sharing you Posts.'
-			sender = settings.EMAIL_HOST_USER
+			sender = 'manibarathi.s@gmail.com'
 			receiver = [email,]
 			send_mail(subject,msg, sender, receiver)
 			messages.success(request,f'Account created for {username}!')
