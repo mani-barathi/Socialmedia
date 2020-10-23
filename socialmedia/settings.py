@@ -20,12 +20,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'i%*gj++jydoplq+q1i+7al)_plat_bqkf)4l*nuv*8pf*r*3v-'
-
+# SECRET_KEY = 'i%*gj++jydoplq+q1i+7al)_plat_bqkf)4l*nuv*8pf*r*3v-'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['socialmediadjango.herokuapp.com']
 
 
 # Application definition
@@ -150,8 +150,8 @@ DEFAULT_FROM_EMAIL = 'socialmedia Team <noreply@gmail.com>'
 SERVER_EMAIL = EMAIL_HOST_USER
 
 
-AWS_ACCESS_KEY_ID = 'AKIAQ7DQ4JBKHMGXEW7S'
-AWS_SECRET_ACCESS_KEY = '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'
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = 'socialmedia-django'
 AWS_S3_HOST = 'rds.ap-south-1.amazonaws.com ' 
 AWS_S3_REGION_NAME="ap-south-1"
