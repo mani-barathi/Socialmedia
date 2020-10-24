@@ -23,7 +23,7 @@ def signup(request):
 			form.save()
 			subject = 'Welocome to Social Media'
 			msg = f'Hi {username}, We are glad to have you here!. Start sharing you Posts.'
-			sender = 'manibarathi.s@gmail.com'
+			sender = 'youremail.s@gmail.com'
 			receiver = [email,]
 			send_mail(subject,msg, sender, receiver)
 			messages.success(request,f'Account created for {username}!')
