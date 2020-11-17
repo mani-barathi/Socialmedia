@@ -7,5 +7,5 @@ A Social media Website inspired from Instagram, where users can signup, login, p
 3. **AWS** (Amazon web services) S3 Bucket for storing all images.
 4. **Heroku** for hosting the site.
 
-Clich [Here](http://socialmediadjango.herokuapp.com/"sociamediadjango.herokuapp.com") to visit the page
+Clich [Here](http://socialmediadjango.herokuapp.com/ "Socialmedia") to visit the page
 
