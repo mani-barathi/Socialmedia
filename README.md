@@ -2,6 +2,7 @@
 A Social media Website inspired from Instagram, where users can signup, login, post images and view other people posts.
 
 Clich [Here](http://socialmediadjango.herokuapp.com/ "Socialmedia") to visit the page
+
 test user credentials:-
 username - testuser02
 password - testpassword
