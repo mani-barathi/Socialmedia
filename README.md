@@ -4,7 +4,9 @@ A Social media Website inspired from Instagram, where users can signup, login, p
 Clich [Here](http://socialmediadjango.herokuapp.com/ "Socialmedia") to visit the page
 
 test user credentials:-
+
 username - testuser02
+
 password - testpassword
 
 #### Technology Used
